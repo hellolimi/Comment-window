@@ -42,27 +42,61 @@
                     <span class="userName">USERNAME</span>
                     <form name="commentForm">
                         <input type="text" name="comment" id="comment" required/>
-                        <button>Comment</button>
+                        <button type="button">Comment</button>
                     </form>
                 </div>
-                <div class="NotloggedIn">
-                    <button>Click here to share your comment!</button>
+                <div class="notLoggedIn">
+                    <button type="button">Click here to share your comment!</button>
                 </div>
             </div>
             <ul class="comments">
                 <li>
-                    <img class="userPic" src="https://pixabay.com/get/g86ef63c8aa8a9b4a5b902a78a03f3601c244709ca283025675c539d35222296da0f1bbeef29d375ad9842183abb27ac7_640.jpg" alt="사용자 프로필 이미지" />
-                    <span class="userName">Limi</span>
-                    <span class="createdAt"></span>
+                    <div class="profile">
+                        <img class="userPic" src="https://pixabay.com/get/g86ef63c8aa8a9b4a5b902a78a03f3601c244709ca283025675c539d35222296da0f1bbeef29d375ad9842183abb27ac7_640.jpg" alt="사용자 프로필 이미지" />
+                        <span class="userName">Limi</span>
+                        <span class="createdAt">Now</span>
+                    </div>
                     <p>Is this your cat?! SO CUTE 🥰</p>
+                    <ul class="socialBlock">
+                        <li>
+                            <button type="button" class="likes">Reply</button>
+                        </li>
+                        <li>
+                            <button type="button" class="likes"><img src="img/like_empty.png"></button>
+                            <span class="lilketNum">0</span>
+                        </li>
+                        <li>
+                            <button type="button" class="dislikes"><img src="img/dislike_empty.png"></button>
+                            <span class="dislilketNum">0</span>
+                        </li>
+                    </ul>
                 </li>
                 <li>
-                    <img class="userPic" src="https://pixabay.com/get/gb0604375ebe6ff379aa267bf734994d823bf775b8831144103a2d46b49de770affb3f2fd445c06945e7ef1a29eee8c67_640.jpg" alt="사용자 프로필 이미지" />
-                    <span class="userName">CatLover</span>
-                    <span class="createdAt"></span>
+                    <div class="profile">
+                        <img class="userPic" src="https://pixabay.com/get/gb0604375ebe6ff379aa267bf734994d823bf775b8831144103a2d46b49de770affb3f2fd445c06945e7ef1a29eee8c67_640.jpg" alt="사용자 프로필 이미지" />
+                        <span class="userName">CatLover</span>
+                        <span class="createdAt">2021. 05. 05</span>
+                    </div>
                     <p>I wanna pat herrrr...</p>
+                    <ul class="socialBlock">
+                        <li>
+                            <button type="button">Reply</button>
+                            <span class="commentNum">0</span>
+                        </li>
+                        <li>
+                            <button type="button" class="likes"><img src="img/like_empty.png"></button>
+                            <span class="lilketNum">0</span>
+                        </li>
+                        <li>
+                            <button type="button" class="dislikes"><img src="img/dislike_empty.png"></button>
+                            <span class="dislilketNum">0</span>
+                        </li>
+                    </ul>
                 </li>
             </ul>
+            <footer>
+                &copy;LIMKIM
+            </footer>
         </div>
         <script>
             const postDate = document.getElementById("postDate");
