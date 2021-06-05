@@ -2,41 +2,41 @@
 
 document.cookie = "crossCookie=bar; SameSite=None; Secure";
 
-/* socialBlock */
-//comments
+/*socialBlock */
+//total comments
 const commentNum = document.querySelector('.commentNum');
 const comments = document.getElementsByClassName('comment');
 commentNum.innerText = comments.length;
-//likes
-let likeCount = 10;
-const likeNum = document.querySelector('.lilketNum');
-const likeBtn = document.querySelector('.likes');
-likeNum.innerText = likeCount;
-
-let dislikeCount = 0;
-const dislikeNum = document.querySelector('.dislilketNum');
-const dislikeBtn = document.querySelector('.dislikes');
-
-const socialBlock = document.querySelector('.mobile > .socialBlock');
-
-socialBlock.addEventListener("click", (e)=>{
+/* likes/dislikes */
+const socialBlock = document.querySelectorAll('.socialBlock');
+socialBlock.forEach(el => el.addEventListener("click", (e)=>{
     const {target} = e;
     if(target.nodeName === "BUTTON"){
         if(target.classList.contains("likes")){
-            onClickToggle(target, likeNum, likeCount);
+            onClickToggle(target);
         }else{
-            onClickToggle(target, dislikeNum, dislikeCount);
+            onClickToggle(target);
         }
     }
-});
+}));
 
-function onClickToggle(target, num, count){
-    if(!Boolean(target.classList.contains("active"))){
-        target.classList.add('active');
-        count++; 
+function onClickToggle(target){
+    const parent = target.parentNode;
+    const num = parent.childNodes[3];
+    const ulBlock = parent.parentNode;
+    let count = Number(num.textContent);
+    if(!target.classList.contains("active")){
+        if(ulBlock.classList.contains("done")){
+            alert("Sorry! You can only like OR dislike this!");
+        }else{
+            target.classList.add('active');
+            count++;
+            ulBlock.classList.add('done');
+        }
     }else{
         target.classList.remove('active');
-        count = count;
+        count--;
+        ulBlock.classList.remove('done');
     }
     num.innerText = count;
 }
