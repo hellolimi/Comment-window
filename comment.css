@@ -36,7 +36,7 @@ body{ height:100vh; background-color:#F5F5F5; }
 .loggedIn .profile img{ float:left; width:2.5rem; height:2.5rem; object-fit:cover; object-position:center; border-radius:50%; }
 .loggedIn .profile .userName{ margin-left:0.5rem; font-size:1.125rem; font-weight:400; }
 .loggedIn #commentForm { display:flex; justify-content: space-between; width:100%; }
-.loggedIn #commentForm input{ width:75%; height:2.5rem; padding:0 0.5rem; }
+.loggedIn #commentForm input{ width:75%; height:2.5rem; padding:0 0.5rem; border:1px solid #999; }
 .loggedIn #commentForm button{ width:20%; height:2.5rem; background-color:#F5F5F5; border:1px solid #333; border-radius:0.25rem; }
 .notLoggedIn button{ display: none; font-weight:400; text-decoration:underline; }
 
@@ -45,8 +45,17 @@ body{ height:100vh; background-color:#F5F5F5; }
 .comments > li{ width:100%; padding:0.5rem 1rem; border-bottom:1px solid #333; }
 .comments .profile{ height:2.5rem; line-height:2.5rem; margin-bottom:0.5rem; }
 .comments .profile img{ float:left; width:2.5rem; height:2.5rem; object-fit:cover; object-position:center; border-radius:50%; }
-.comments .profile .userName{ margin-left:0.5rem; font-size:1.125rem; font-weight:400; }
-.comments .profile .createdAt{ float:right; font-size:0.975rem; }
+.comments .profile .userName{ float:left; margin-left:0.5rem; font-size:1.125rem; font-weight:400; }
+.comments .profile .createdAt{ float:left; margin-left:1rem; font-size:0.975rem; }
+
+.comments .profile > div{ position:relative; float:right; margin-left:1rem; }
+.comments .profile > div > a{ font-size:0.5rem; color:#999; }
+.comments .profile > div ul{ position:absolute; top:2.5rem; right:0; z-indeX:10; display:none; margin-left:0.5rem; border:1px solid #ccc; background-color:#ededed; }
+.comments .profile > div li{ line-height: 2.5rem; }
+.comments .profile > div li a{ display:block; padding:0 0.5rem; height:100%; font-weight:400; color:#666; }
+
+.comments .profile > div.active ul{ display:flex; flex-direction:column; }
+
 .comments .socialBlock{ display:flex; width:100%; padding:1rem 1rem 0.5rem; }
 .comments .socialBlock li{ display:flex; align-items:center; margin-right:1rem; }
 .comments .socialBlock li span{ padding:0 0.5rem; }
