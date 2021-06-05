@@ -31,8 +31,14 @@ body{ height:100vh; background-color:#F5F5F5; }
 
 /* createComment */
 .createComment{ width:100%; padding:1rem; border-bottom:1px solid #333; background-color:#ededed; }
-.loggedIn{ display: none; }
-.notLoggedIn button{ font-weight:400; text-decoration:underline; }
+.loggedIn{ display:block; }
+.loggedIn .profile{ height:2.5rem; line-height:2.5rem; margin-bottom:0.5rem; }
+.loggedIn .profile img{ float:left; width:2.5rem; height:2.5rem; object-fit:cover; object-position:center; border-radius:50%; }
+.loggedIn .profile .userName{ margin-left:0.5rem; font-size:1.125rem; font-weight:400; }
+.loggedIn #commentForm { display:flex; justify-content: space-between; width:100%; }
+.loggedIn #commentForm input{ width:75%; height:2.5rem; padding:0 0.5rem; }
+.loggedIn #commentForm button{ width:20%; height:2.5rem; background-color:#F5F5F5; border:1px solid #333; border-radius:0.25rem; }
+.notLoggedIn button{ display: none; font-weight:400; text-decoration:underline; }
 
 /* comments */
 .comments{ width:100%; }
