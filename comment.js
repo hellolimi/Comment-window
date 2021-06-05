@@ -60,6 +60,17 @@ class LiModel {
                 <img class="userPic" src="${this.userPhoto}" alt="사용자 프로필 이미지" />
                 <span class="userName">${this.userName}</span>
                 <span class="createdAt">${timeView}</span>
+                <div class="option">
+                    <a href="#option" class="optionToggle" onclick="toggleOption()">● ● ●</a>
+                    <ul>
+                        <li>
+                            <a href="#update">Update</a>
+                        </li>
+                        <li>
+                            <a href="#delete">Delete</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
             <p>${this.comment}</p>
             <ul class="socialBlock" onclick="setClickEvent()">
@@ -98,6 +109,11 @@ createForm.addEventListener("submit", (e)=>{
     input.value = "";
     commentNum.innerText = comments.length;
 });
+/* delete comments */
+function toggleOption(){
+    const {target} = window.event;
+    target.parentNode.classList.toggle('active');
+}
 
 /* comments counter */
 const commentNum = document.querySelector('.commentNum');
