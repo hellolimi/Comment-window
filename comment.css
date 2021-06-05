@@ -1,10 +1,11 @@
 @charset "UTF-8";
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500&display=swap');
 
-*{padding:0; margin:0; box-sizing:border-box; font-size:18px; font-family:'Oswald', 'Malgun Gothic', sans-serif; font-weight:300;}
+*{padding:0; margin:0; box-sizing:border-box; font-size:18px; font-family:'Oswald', 'Malgun Gothic', sans-serif; font-weight:300; color:#333;}
 li{ list-style: none; }
 img{ display: block; width:180px; }
 button{ cursor: pointer; background-color:transparent; border:none; }
+a{ text-decoration:none; }
 body{ height:100vh; background-color:#F5F5F5; }
 
 .mobile{ overflow-x: hidden; overflow-y:visible;  box-sizing:content-box; }
@@ -23,10 +24,10 @@ body{ height:100vh; background-color:#F5F5F5; }
 .mobile > .socialBlock li{ display:flex; align-items:center; margin-right:1rem; }
 .mobile > .socialBlock li span{  padding:0 0.5rem; font-size:1.125rem; }
 .mobile > .socialBlock button{ width:2.25rem; height:2.25rem; background-repeat:no-repeat; background-size:2.25rem 2.25rem; background-position: center;  }
-.mobile > .socialBlock .likes{ background-image:url(img/like_empty.png); }
-.mobile > .socialBlock .likes.active{ background-image:url(img/like_fill.png); }
-.mobile > .socialBlock .dislikes{ background-image:url(img/dislike_empty.png); }
-.mobile > .socialBlock .dislikes.active{ background-image:url(img/dislike_fill.png); }
+.likes{ background-image:url(img/like_empty.png); }
+.likes.active{ background-image:url(img/like_fill.png); }
+.dislikes{ background-image:url(img/dislike_empty.png); }
+.dislikes.active{ background-image:url(img/dislike_fill.png); }
 
 /* createComment */
 .createComment{ width:100%; padding:1rem; border-bottom:1px solid #333; background-color:#ededed; }
@@ -43,8 +44,8 @@ body{ height:100vh; background-color:#F5F5F5; }
 .comments .socialBlock{ display:flex; width:100%; padding:1rem 1rem 0.5rem; }
 .comments .socialBlock li{ display:flex; align-items:center; margin-right:1rem; }
 .comments .socialBlock li span{ padding:0 0.5rem; }
-.comments .socialBlock li:nth-child(1) button{ padding-right:1rem; background-size:0.75rem; background-image:url(img/reply_icon.png); background-position:right center; background-repeat:no-repeat; color:#666; font-weight:400; }
-.comments .socialBlock button img{ width:1.75rem; }
+.comments .socialBlock a{ padding-right:1rem; background-size:0.75rem; background-image:url(img/reply_icon.png); background-position:right center; background-repeat:no-repeat; background-size:0.675rem; color:#666; font-weight:400; }
+.comments .socialBlock button.likes, .socialBlock button.dislikes { width:2.25rem; height:2.25rem; background-repeat:no-repeat; background-size:2.25rem 2.25rem; background-position: center;  }
 
 /* footer */
 footer{ width:100%; padding:1rem; text-align:center; background-color:#ededed; font-size:1.5rem; font-weight:400; }
