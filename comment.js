@@ -26,7 +26,7 @@ function dateForm(){
     const now = new Date().toLocaleDateString('ko-KR', dateOption);
     return now.replaceAll(". ", "/").slice(0, 10);
 }
-
+console.log(Date.now())
 class LiModel {
     constructor(name, photo, date, createdAt, comment){
         this.userName = name,
@@ -101,14 +101,35 @@ commentsData.map(el => {
 /* create comments */
 const createForm = document.forms.commentForm;
 createForm.addEventListener("submit", (e)=>{
-    e.preventDefault();
-    const input = e.target.comment;
-    const newComment = new LiModel("CIZION", "img/userPhoto.png", dateForm(), Date.now(), input.value);  
-    commentsData.push(newComment); 
-    commentsData[commentsData.length-1].makeLi();
-    input.value = "";
-    commentNum.innerText = comments.length;
+    onCreate(e);
 });
+
+function onCreate(e){
+    e.preventDefault();
+    let filter = ["바보", "멍청이", "idiot", "stupid"];
+    const input = e.target.comment;
+    const text = input.value.toLowerCase();
+    const alert = document.querySelector(".alert");
+    for(let i of filter){
+        if(text.includes(i)){
+            return alert.classList.add("active");
+        }else{
+            continue;
+        }
+    }
+    const getUsers = commentsData.map(el => el.userName);
+    const lastComment = getUsers.lastIndexOf("CIZION");
+    if(lastComment>0 && commentsData[lastComment].createdAt >= Date.now() - 6000){
+        return window.alert(`Sorry! Cannot leave a comment in a row! \nPlease try later :)`);
+    }else{
+        alert.classList.remove("active");
+        const newComment = new LiModel("CIZION", "img/userPhoto.png", dateForm(), Date.now(), input.value);  
+        commentsData.push(newComment); 
+        commentsData[commentsData.length-1].makeLi();
+        input.value = "";
+        commentNum.innerText = comments.length;
+    }
+}
 /* delete comments */
 function toggleOption(){
     const {target} = window.event;
