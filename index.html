@@ -16,13 +16,13 @@
         <div class="mobile">
             <div class="top">
                 <h1>HELLO EVERYONE</h1>
-                <span id="postDate">2021. 05. 06</span>
+                <span id="postDate">2021. 06. 06</span>
             </div>
             <div class="post">
                 <img src="https://cdn.pixabay.com/photo/2015/02/25/17/56/cat-649164_960_720.jpg" alt="고양이">
                 <p>This cat is so CUTE! What do you think? 😍</p>
             </div>
-            <ul class="socialBlock">
+            <ul class="socialBlock" onclick="setClickEvent()">
                 <li>
                     <span>Comments</span>
                     <span class="commentNum">0</span>
@@ -38,11 +38,13 @@
             </ul>
             <div class="createComment">
                 <div class="loggedIn">
-                    <img class="userPic" src="img/userPhoto.png" alt="사용자 프로필 이미지" />
-                    <span class="userName">USERNAME</span>
-                    <form name="commentForm">
-                        <input type="text" name="comment" id="comment" required/>
-                        <button type="button">Comment</button>
+                    <div class="profile">
+                        <img class="userPic" src="img/userPhoto.png" alt="사용자 프로필 이미지" />
+                        <span class="userName">CIZION</span>
+                    </div>
+                    <form name="commentForm" id="commentForm">
+                        <input type="text" name="comment" id="comment" placeholder="Leave your comment..." required/>
+                        <button type="submit">Comment</button>
                     </form>
                 </div>
                 <div class="notLoggedIn">
@@ -50,48 +52,7 @@
                 </div>
             </div>
             <ul class="comments">
-                <li class="comment">
-                    <div class="profile">
-                        <img class="userPic" src="img/userPhoto.png" alt="사용자 프로필 이미지" />
-                        <span class="userName">Limi</span>
-                        <span class="createdAt">Now</span>
-                    </div>
-                    <p>Is this your cat?! SO CUTE 🥰</p>
-                    <ul class="socialBlock">
-                        <li>
-                            <a href="#reply" class="likes">Reply</a>
-                        </li>
-                        <li>
-                            <button type="button" class="likes"></button>
-                            <span class="count">0</span>
-                        </li>
-                        <li>
-                            <button type="button" class="dislikes"></button>
-                            <span class="count">0</span>
-                        </li>
-                    </ul>
-                </li>
-                <li class="comment">
-                    <div class="profile">
-                        <img class="userPic" src="img/userPhoto.png" alt="사용자 프로필 이미지" />
-                        <span class="userName">CatLover</span>
-                        <span class="createdAt">2021. 05. 05</span>
-                    </div>
-                    <p>I wanna pat herrrr...</p>
-                    <ul class="socialBlock">
-                        <li>
-                            <a href="#reply" class="likes">Reply</a>
-                        </li>
-                        <li>
-                            <button type="button" class="likes"></button>
-                            <span class="count">0</span>
-                        </li>
-                        <li>
-                            <button type="button" class="dislikes"></button>
-                            <span class="count">0</span>
-                        </li>
-                    </ul>
-                </li>
+                
             </ul>
             <footer>
                 &copy;LIMKIM
