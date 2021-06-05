@@ -1,0 +1,53 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500&display=swap');
+
+*{padding:0; margin:0; font-size:18px; font-family:'Oswald', 'Malgun Gothic', sans-serif; font-weight:300;}
+li{ list-style: none; }
+img{ display: block; width:180px; }
+button{ cursor: pointer; background:transparent; border:none; }
+body{ height:100vh; background-color:#F5F5F5; }
+
+.mobile{ overflow-x: hidden; overflow-y:visible; }
+
+/* top */
+.top{ display:flex; justify-content:space-between; align-items:center; width:100%; padding:0.5rem 1rem; box-sizing:border-box; border-bottom:1px solid #333; }
+.top h1{ font-size:2rem; }
+
+/* post */
+.post{ display:flex; flex-direction: column; width:100%; padding:1rem; box-sizing:border-box; border-bottom:1px solid #333; }
+.post img{ width:100%; margin-bottom:1rem; }
+.post p{ font-size:1.25rem; }
+
+/* socialBlock */
+.mobile > .socialBlock{ display:flex; width:100%; padding:0 1rem; box-sizing:border-box; border-bottom:1px solid #333;}
+.mobile > .socialBlock li{ display:flex; align-items:center; margin-right:1rem; }
+.mobile > .socialBlock li span{ padding:0 0.5rem; }
+.mobile > .socialBlock button{ padding:0.5rem; }
+.mobile > .socialBlock button img{ width:2rem; }
+
+/* createComment */
+.createComment{ width:100%; padding:1rem; border-bottom:1px solid #333; background-color:#ededed; }
+.loggedIn{ display: none; box-sizing:border-box; }
+.notLoggedIn button{ font-weight:400; text-decoration:underline; }
+
+/* comments */
+.comments{ width:100%; }
+.comments > li{ width:100%; padding:0.5rem 1rem; box-sizing:border-box; border-bottom:1px solid #333; }
+.comments .profile{ height:2.5rem; line-height:2.5rem; margin-bottom:0.5rem; }
+.comments .profile img{ float:left; width:2.5rem; height:2.5rem; object-fit:cover; object-position:center; border-radius:50%; }
+.comments .profile .userName{ margin-left:0.5rem; font-size:1.125rem; font-weight:400; }
+.comments .profile .createdAt{ float:right; font-size:0.975rem; }
+.comments .socialBlock{ display:flex; width:100%; padding:0 1rem; box-sizing:border-box; }
+.comments .socialBlock li{ display:flex; align-items:center; margin-right:1rem; }
+.comments .socialBlock li span{ padding:0 0.5rem; }
+.comments .socialBlock li:nth-child(1) button{ padding-right:1rem; background-size:0.75rem; background-image:url(img/reply_icon.png); background-position:right center; background-repeat:no-repeat; color:#666; font-weight:400; }
+.comments .socialBlock button{ padding:0.5rem; }
+.comments .socialBlock button img{ width:1.5rem; }
+
+/* footer */
+footer{ width:100%; padding:1rem; box-sizing:border-box; text-align:center; background-color:#ededed; font-size:1.5rem; font-weight:400; }
+
+@media screen and (min-width:1024px) {
+    body{ display:flex; align-items:center; }
+    .mobile{ width:540px; height:720px; margin:auto; border:1rem solid #333; border-radius:1rem; }
+}
