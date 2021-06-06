@@ -4,33 +4,11 @@ document.cookie = "crossCookie=bar; SameSite=None; Secure";
 
 /* comments */
 const commentsUl = document.querySelector(".comments");
-let commentsData = [
-    {
-        email: "ltbllim@gmail.com",
-        userName: "Limi",
-        userPhoto: "img/limPhoto.png",
-        date: dateForm(),
-        createdAt: 1622908185945,
-        comment: "Is this your cat?! SO CUTE 🥰"
-    },
-    {
-        email: "adam@gmail.com",
-        userName: "Adam",
-        userPhoto: "img/adamPhoto.png",
-        date: dateForm(),
-        createdAt: 1622916314040,
-        comment: "I wanna pat herrrr..."
-    }
-];
-
-function dateForm(){
-    const dateOption = {year:"numeric", month:"2-digit", day:"2-digit"}
-    const now = new Date().toLocaleDateString("ko-KR", dateOption);
-    return now.replaceAll(". ", "/").slice(0, 10);
-}
+let commentsData = [];
 
 class LiModel {
-    constructor(email, name, photo, date, createdAt, comment){
+    constructor(id, email, name, photo, date, createdAt, comment){
+        this.id = id!==""?id:commentsData.length + 1,
         this.email = email,
         this.userName = name,
         this.userPhoto = photo,
@@ -68,10 +46,10 @@ class LiModel {
                     <a href="#option" class="optionToggle" onclick="toggleOption()">● ● ●</a>
                     <ul>
                         <li>
-                            <a href="#update">Update</a>
+                            <a href="#update" class="update" data-id=${this.id}>Update</a>
                         </li>
                         <li>
-                            <a href="#delete">Delete</a>
+                            <a href="#delete" class="delete" data-id=${this.id} onclick="onDelete()">Delete</a>
                         </li>
                     </ul>
                 </div>
@@ -95,12 +73,26 @@ class LiModel {
         commentsUl.prepend(li);
     }
 }
+commentsData = [
+    new LiModel(1, "ltbllim@gmail.com", "Limi", "img/limPhoto.png", dateForm(), 1622908185945, "Is this your cat?! SO CUTE 🥰"),
+    new LiModel(2, "adam@gmail.com", "Adam", "img/adamPhoto.png", dateForm(), 1622916314040, "I wanna pat herrrr...")
+];
 
-commentsData.map(el => {
-    const {email, userName, userPhoto, date, createdAt, comment} = el;
-    const aComment = new LiModel(email, userName, userPhoto, date, createdAt, comment);
-    aComment.makeLi();
-});
+function dateForm(){
+    const dateOption = {year:"numeric", month:"2-digit", day:"2-digit"}
+    const now = new Date().toLocaleDateString("ko-KR", dateOption);
+    return now.replaceAll(". ", "/").slice(0, 10);
+}
+
+createComment(commentsData);
+
+/* create comments from data */
+function createComment(data){
+    commentsUl.innerHTML = null;
+    data.map(el => {
+        el.makeLi();
+    });
+}
 
 /* create comments */
 const createForm = document.forms.commentForm;
@@ -125,17 +117,13 @@ function onCreate(e){
     if(lastComment>0 && commentsData[lastComment].createdAt >= Date.now() - 6000){
         return window.alert(`Sorry! Cannot leave a comment in a row! \nPlease try later :)`);
     }else{
-        const newComment = new LiModel(getUserToken(), "CIZION", "img/userPhoto.png", dateForm(), Date.now(), input.value);  
+        const newComment = new LiModel("", getUserToken(), "CIZION", "img/userPhoto.png", dateForm(), Date.now(), input.value);  
         commentsData.push(newComment); 
         commentsData[commentsData.length-1].makeLi();
         input.value = "";
         commentNum.innerText = comments.length;
     }
-}
-/* delete comments */
-function toggleOption(){
-    const {target} = window.event;
-    target.parentNode.classList.toggle("active");
+    
 }
 
 /* comments counter */
