@@ -17,6 +17,7 @@
             <div class="top">
                 <h1>HELLO EVERYONE</h1>
                 <span id="postDate">2021. 06. 06</span>
+                <a href="#logOut" id="logOut">Log Out→</a>
             </div>
             <div class="post">
                 <img src="https://cdn.pixabay.com/photo/2015/02/25/17/56/cat-649164_960_720.jpg" alt="고양이">
@@ -43,12 +44,32 @@
                         <span class="userName">CIZION</span>
                     </div>
                     <form name="commentForm" id="commentForm">
+                        <label class="away" for="comment">comment</label>
                         <input type="text" name="comment" id="comment" placeholder="Leave your comment..." required/>
                         <button type="submit">Comment</button>
                     </form>
                 </div>
                 <div class="notLoggedIn">
-                    <button type="button">Click here to share your comment!</button>
+                    <button type="button" class="logIn">Click here to share your comment!</button>
+                    <div class="socialLogin">
+                        <ul class="snsBox">
+                            <li class="snsBtn"><a href="NAVER" class="snsBtn">Sign in with <span>&nbsp;NAVER</span></a></li>
+                            <li class="snsBtn"><a href="KAKAO" class="snsBtn">Sign in with <span>&nbsp;KAKAO</span></a></li>
+                            <li class="snsBtn"><a href="GOOGLE" class="snsBtn">Sign in with <span>&nbsp;GO</span><span>OG</span><span>LE</span></a></li>
+                            <li class="snsBtn"><a href="FACEBOOK" class="snsBtn">Sign in with <span>&nbsp;FACEBOOK</span></a></li>
+                            <li class="snsBtn"><a href="TWITTER" class="snsBtn">Sign in with <span>&nbsp;TWITTER</span></a></li>
+                        </ul>
+                        <div class="loginBox">
+                            <a href="#close" id="closeBox">CLOSE X</a>
+                            <h3 class="thisSNS">NAVER</h3>
+                            <p>Sign in with us to share your comments!</p>
+                            <form name="socialLoginForm">
+                                <input type="email" name="email" placeholder="email" required>
+                                <input type="password" name="password" placeholder="password" required>
+                                <button type="submit">Sign In</button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
             <ul class="comments">
