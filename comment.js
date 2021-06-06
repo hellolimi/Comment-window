@@ -42,11 +42,11 @@ class LiModel {
                 <img class="userPic" src="${this.userPhoto}" alt="사용자 프로필 이미지" />
                 <span class="userName">${this.userName}</span>
                 <span class="createdAt">${timeView}</span>
-                <div class=${userToken === this.email?"optionTrue option":"option"}>
+                <div class=${userToken === this.email?"optionTrue":""} >
                     <a href="#option" class="optionToggle" onclick="toggleOption()">● ● ●</a>
                     <ul>
                         <li>
-                            <a href="#update" class="update" data-id=${this.id}>Update</a>
+                            <a href="#update" class="update" data-id=${this.id} onclick="onUpdate()">Update</a>
                         </li>
                         <li>
                             <a href="#delete" class="delete" data-id=${this.id} onclick="onDelete()">Delete</a>
@@ -54,7 +54,11 @@ class LiModel {
                     </ul>
                 </div>
             </div>
-            <p>${this.comment}</p>
+            <p id="aComment${this.id}" class="aComment">${this.comment}</p>
+            <form name="updateForm" id="updateForm${this.id}" class="updateForm" onsubmit="updateFormSubmit()">
+                <input type="text" name="newComment" value="${this.comment}" />
+                <button type="submit">Update</button>
+            </form>
             <ul class="socialBlock" onclick="setClickEvent()">
                 <li>
                     <a href="#reply" class="likes">Reply</a>
@@ -93,6 +97,55 @@ function createComment(data){
         el.makeLi();
     });
 }
+/* toggleOption */
+function toggleOption(){
+    const {target} = window.event;
+    target.parentNode.classList.toggle("active");
+}
+/* Update / Delete a comment */
+function onDelete(){
+    const target = window.event.target;
+    const targetId = target.dataset.id;
+    const confirm = window.confirm(`Do you really want to delete this post?\nCannot recover it once it's deleted!`);
+    if(confirm){
+        commentsData = commentsData.filter((el, index) => index !== targetId -1);
+        createComment(commentsData);
+        commentNum.innerText = comments.length;
+    }
+}
+function onUpdate(){
+    window.event.preventDefault();
+    const target = window.event.target;
+    const targetId = target.dataset.id;
+    const aComment = document.getElementById(`aComment${targetId}`);
+    const theForm = document.getElementById(`updateForm${targetId}`);
+    const option = document.querySelector(".optionTrue");
+    if(!theForm.classList.contains("active")){
+        aComment.classList.add("hide");
+        theForm.classList.add("active");
+        option.classList.remove("active");
+        window.location.hash = targetId;
+    }else{
+        aComment.classList.remove("hide");
+        theForm.classList.remove("active");
+    }
+}
+
+function updateFormSubmit(){
+    const thisEvent = window.event;
+    thisEvent.preventDefault();
+    const {target} = thisEvent;
+    const newText = target.newComment;
+    if(noBadWords(newText)){
+        return false;
+    }else{
+        let commentId = window.location.hash;
+        commentId = commentId.slice(1);
+        const index = commentsData.findIndex(el => el.id == commentId);
+        commentsData[index].comment = newText.value;
+        createComment(commentsData);
+    }
+}
 
 /* create comments */
 const createForm = document.forms.commentForm;
@@ -100,30 +153,38 @@ createForm.addEventListener("submit", (e)=>{
     onCreate(e);
 });
 
-function onCreate(e){
-    e.preventDefault();
+/* no profanity */
+function noBadWords(val){
     let filter = ["바보", "멍청이", "idiot", "stupid"];
-    const input = e.target.comment;
-    const text = input.value.toLowerCase();
+    const text = val.value.toLowerCase();
     for(let i of filter){
         if(text.includes(i)){
-            return window.alert(`Please use better words for the others!`);
+           window.alert(`Please use better words for the others!`);
+           return true;
         }else{
             continue;
         }
     }
-    const getUsers = commentsData.map(el => el.userName);
-    const lastComment = getUsers.lastIndexOf("CIZION");
-    if(lastComment>0 && commentsData[lastComment].createdAt >= Date.now() - 6000){
-        return window.alert(`Sorry! Cannot leave a comment in a row! \nPlease try later :)`);
+}
+
+function onCreate(e){
+    e.preventDefault();
+    const input = e.target.comment;
+    if(noBadWords(input)){
+        return false;
     }else{
-        const newComment = new LiModel("", getUserToken(), "CIZION", "img/userPhoto.png", dateForm(), Date.now(), input.value);  
-        commentsData.push(newComment); 
-        commentsData[commentsData.length-1].makeLi();
-        input.value = "";
-        commentNum.innerText = comments.length;
+        const getUsers = commentsData.map(el => el.userName);
+        const lastComment = getUsers.lastIndexOf("CIZION");
+        if(lastComment>0 && commentsData[lastComment].createdAt >= Date.now() - 6000){
+            return window.alert(`Sorry! Cannot leave a comment in a row! \nPlease try later :)`);
+        }else{
+            const newComment = new LiModel("", getUserToken(), "CIZION", "img/userPhoto.png", dateForm(), Date.now(), input.value);  
+            commentsData.push(newComment); 
+            commentsData[commentsData.length-1].makeLi();
+            input.value = "";
+            commentNum.innerText = comments.length;
+        }
     }
-    
 }
 
 /* comments counter */
@@ -204,7 +265,6 @@ function setParam(target){
 }
 function setTitle(){
     let queryString = window.location.hash;
-    console.log(queryString)
     queryString = queryString.slice(1);
     const thisSNS = document.querySelector(".thisSNS");
     thisSNS.innerText = `Sign In with ${queryString}`;
