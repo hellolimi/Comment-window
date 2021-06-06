@@ -103,7 +103,7 @@ body{ height:100vh; background-color:#F5F5F5; }
 
 .comments .profile > div.active ul{ display:flex; flex-direction:column; }
 .comments li > p{ font-size:1.125rem; }
-.comments .socialBlock{ display:flex; width:100%; padding:1rem 1rem 0.5rem; }
+.comments .socialBlock{ display:flex; width:100%; padding:1rem 0 0.5rem; }
 .comments .socialBlock li{ display:flex; align-items:center; margin-right:1rem; }
 .comments .socialBlock li span{ padding:0 0.5rem; }
 .comments .socialBlock a{ padding-right:1rem; background-size:0.75rem; background-image:url(img/reply_icon.png); background-position:right center; background-repeat:no-repeat; background-size:0.675rem; color:#666; font-weight:400; }
