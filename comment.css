@@ -40,7 +40,8 @@ body{ height:100vh; background-color:#F5F5F5; }
 .loggedIn #commentForm input{ width:75%; height:2.5rem; padding:0 0.5rem; border:1px solid #999; }
 .loggedIn #commentForm button{ width:20%; height:2.5rem; background-color:#F5F5F5; border:1px solid #333; border-radius:0.25rem; }
 
-.notLoggedIn button{ display:block; font-weight:400; text-decoration:underline; }
+.notLoggedIn button{ display:block; font-weight:400; font-size:1.125rem;}
+.notLoggedIn button span{ font-weight:500; font-size:1.45rem; }
 #logOut { font-weight:500; }
 .socialLogin{ display:none; position:absolute; top:0; left:0; width:100%; height:100%; background-color:rgba(51, 51, 51, 0.479); text-align:center; }
 .socialLogin ul{ display:none; position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); padding:2rem; border:1px solid #333; border-radius:0.25rem; background-color:#ededed; }
