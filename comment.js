@@ -16,7 +16,7 @@ let commentsData = [
         userName: "Adam",
         userPhoto: "img/adamPhoto.png",
         date: dateForm(),
-        createdAt: 1622908185945,
+        createdAt: 1622916314040,
         comment: "I wanna pat herrrr..."
     }
 ];
@@ -109,10 +109,9 @@ function onCreate(e){
     let filter = ["바보", "멍청이", "idiot", "stupid"];
     const input = e.target.comment;
     const text = input.value.toLowerCase();
-    const alert = document.querySelector(".alert");
     for(let i of filter){
         if(text.includes(i)){
-            return alert.classList.add("active");
+            return window.alert(`Please use better words for the others!`);
         }else{
             continue;
         }
@@ -122,7 +121,6 @@ function onCreate(e){
     if(lastComment>0 && commentsData[lastComment].createdAt >= Date.now() - 6000){
         return window.alert(`Sorry! Cannot leave a comment in a row! \nPlease try later :)`);
     }else{
-        alert.classList.remove("active");
         const newComment = new LiModel("CIZION", "img/userPhoto.png", dateForm(), Date.now(), input.value);  
         commentsData.push(newComment); 
         commentsData[commentsData.length-1].makeLi();
