@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 document.cookie = "crossCookie=bar; SameSite=None; Secure";
 
@@ -22,11 +22,11 @@ let commentsData = [
 ];
 
 function dateForm(){
-    const dateOption = {year:'numeric', month:'2-digit', day:'2-digit'}
-    const now = new Date().toLocaleDateString('ko-KR', dateOption);
+    const dateOption = {year:"numeric", month:"2-digit", day:"2-digit"}
+    const now = new Date().toLocaleDateString("ko-KR", dateOption);
     return now.replaceAll(". ", "/").slice(0, 10);
 }
-console.log(Date.now())
+
 class LiModel {
     constructor(name, photo, date, createdAt, comment){
         this.userName = name,
@@ -36,19 +36,19 @@ class LiModel {
         this.comment = comment
     }
     makeLi(){
-        const li = document.createElement('li');
+        const li = document.createElement("li");
         li.classList.add("comment");
         let TIME = Date.now();
         let passedTime = (TIME - this.createdAt)/1000;
         let timeView;
         if(passedTime < 60 ){
-            timeView = 'now';
+            timeView = "now";
         }else if(Math.floor(passedTime) === 60){
-            timeView = '1 minute ago'
+            timeView = "1 minute ago"
         }else if(Math.floor(passedTime) < 60 * 60){
             timeView = `${Math.floor(passedTime / 60)} mintues ago`
         }else if(Math.floor(passedTime) === 60 * 60){
-            timeView = '1 hour ago'
+            timeView = "1 hour ago"
         }
         else if(Math.floor(passedTime) < 24 * 60 * 60){
             timeView =`${Math.floor(passedTime / 60 / 60)} hours ago`
@@ -131,12 +131,12 @@ function onCreate(e){
 /* delete comments */
 function toggleOption(){
     const {target} = window.event;
-    target.parentNode.classList.toggle('active');
+    target.parentNode.classList.toggle("active");
 }
 
 /* comments counter */
-const commentNum = document.querySelector('.commentNum');
-const comments = document.getElementsByClassName('comment');
+const commentNum = document.querySelector(".commentNum");
+const comments = document.getElementsByClassName("comment");
 commentNum.innerText = comments.length;
 
 function setClickEvent(){
@@ -151,14 +151,14 @@ function setClickEvent(){
             if(ulBlock.classList.contains("done")){
                 alert("Sorry! You can only like OR dislike this!");
             }else{
-                target.classList.add('active');
+                target.classList.add("active");
                 count++;
-                ulBlock.classList.add('done');
+                ulBlock.classList.add("done");
             }
         }else{
-            target.classList.remove('active');
+            target.classList.remove("active");
             count--;
-            ulBlock.classList.remove('done');
+            ulBlock.classList.remove("done");
         }
         num.innerText = count;
     }
