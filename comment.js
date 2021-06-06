@@ -14,7 +14,9 @@ class LiModel {
         this.userPhoto = photo,
         this.date = date,
         this.createdAt = createdAt,
-        this.comment = comment
+        this.comment = comment,
+        this.like = 0,
+        this.dislike = 0
     }
     makeLi(){
         const li = document.createElement("li");
@@ -59,17 +61,17 @@ class LiModel {
                 <input type="text" name="newComment" value="${this.comment}" />
                 <button type="submit">Update</button>
             </form>
-            <ul class="socialBlock" onclick="setClickEvent()">
+            <ul class="socialBlock">
                 <li>
                     <a href="#reply" class="likes">Reply</a>
                 </li>
-                <li>
-                    <button type="button" class="likes"></button>
-                    <span class="count">0</span>
+                <li class="toggleBtn">
+                    <button type="button" class=${this.like>0?"activelikes":"likes"} data-id="${this.id}" onclick="commentLikeToggle('like')"></button>
+                    <span class="count">${this.like}</span>
                 </li>
-                <li>
-                    <button type="button" class="dislikes"></button>
-                    <span class="count">0</span>
+                <li class="toggleBtn">
+                    <button type="button" class=${this.dislike>0?"activedislikes":"dislikes"} data-id="${this.id}" onclick="commentLikeToggle('dislike')"></button>
+                    <span class="count">${this.dislike}</span>
                 </li>
             </ul>
         `;
@@ -221,6 +223,34 @@ function setClickEvent(){
             onClickToggle();
         }else{
             onClickToggle();
+        }
+    }
+}
+/* comment */
+function commentLikeToggle(btn){
+    const {target} = window.event;
+    const targetId = target.dataset.id;
+    const thisUl = target.parentNode.parentNode;
+    if(!target.className.includes("active")){
+        if(thisUl.children[1].children[0].className.includes("active") || thisUl.children[2].children[0].className.includes("active")){
+            alert("Sorry! You can only like OR dislike this!");
+        }else{
+            if(btn === "like"){
+                commentsData[targetId - 1].like++;
+                createComment(commentsData);
+            }else{
+                commentsData[targetId - 1].dislike++;
+                createComment(commentsData);
+            }
+        }
+    }else{
+        thisUl.classList.remove("done");
+        if(btn === "like"){
+            commentsData[targetId - 1].like--;
+            createComment(commentsData);
+        }else{
+            commentsData[targetId - 1].dislike--;
+            createComment(commentsData);
         }
     }
 }
