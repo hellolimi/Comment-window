@@ -173,4 +173,101 @@ function setClickEvent(){
 }
 
 
+/* log in */
+const notLoggedIn = document.querySelector(".notLoggedIn");
+const getInBtn = document.getElementById("LogIn");
+const socialLogin = document.querySelector(".socialLogin");
+const mobileFrame = document.querySelector(".mobile");
+const snsBtn = document.querySelectorAll(".snsBtn");
+const loginBox = document.querySelector(".loginBox");
+const snsBox = document.querySelector(".snsBox");
+/* socialLogin activation */
+notLoggedIn.addEventListener("click", (e)=>{
+    const {target} = e;
+    if(target.classList.contains("socialLogin")){
+        socialLogin.classList.remove("active");
+        mobileFrame.style.overflowY = "visible";
+    }else{
+        socialLogin.classList.add("active");
+        mobileFrame.style.overflowY = "hidden";
+    }
+});
+snsBtn.forEach(el=>{
+    el.addEventListener("click", (e)=>{
+        e.preventDefault();
+        const {target} = e;
+        setParam(target);
+        setTitle();
+        snsBox.classList.add("done");
+        loginBox.classList.add("active");
+    });
+});
+function setParam(target){
+    let query = target.getAttribute("href");
+    if(target.nodeName === "SPAN"){
+        query = target.parentNode.getAttribute("href");
+    }
+    window.location.hash=query;
+}
+function setTitle(){
+    let queryString = window.location.hash;
+    console.log(queryString)
+    queryString = queryString.slice(1);
+    const thisSNS = document.querySelector(".thisSNS");
+    thisSNS.innerText = `Sign In with ${queryString}`;
+}
 
+/* logInForm */
+const closeBtn = document.getElementById("closeBox");
+closeBtn.addEventListener("click", (e)=>{
+    e.preventDefault();
+    snsBox.classList.remove("done");
+    loginBox.classList.remove("active");
+});
+
+const thisForm = document.forms.socialLoginForm;
+thisForm.addEventListener("submit", ()=>{
+    onSingIn();
+})
+
+function onSingIn(){
+    const {email, password} = thisForm;
+    if(email !== ""){
+        if(password !== ""){
+            let token = email.value
+            sessionStorage.setItem("token", token);
+            window.location.reload();
+        }else{
+            alert('Please enter your password!');
+        }
+    }else{
+        alert('Please enter your email address!');
+    }
+    mobileFrame.style.overflowY = "visible";
+}
+const logOut = document.getElementById("logOut");
+
+logOut.addEventListener("click", ()=>{
+   let confirm = window.confirm("Do you really want to leave?");
+   if(confirm){
+        sessionStorage.removeItem("token");
+        window.location.reload();
+        console.log(sessionStorage.getItem("token"));
+        verifyLogin();
+   }
+});
+verifyLogin();
+function verifyLogin(){
+    const userToken = sessionStorage.getItem("token");
+    const notLoggedIn = document.querySelector(".notLoggedIn");
+    const loggedIn = document.querySelector(".loggedIn");
+    if(Boolean(userToken)){
+        logOut.style.display = "block";
+        notLoggedIn.style.display = "none";
+        loggedIn.style.display = "block";
+    }else{
+        logOut.style.display = "none";
+        notLoggedIn.style.display = "block";
+        loggedIn.style.display = "none";
+    }
+}
