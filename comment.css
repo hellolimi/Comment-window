@@ -42,7 +42,7 @@ body{ height:100vh; background-color:#F5F5F5; }
 
 .notLoggedIn button{ display:block; font-weight:400; text-decoration:underline; }
 #logOut { font-weight:500; }
-.socialLogin{ display:none; position:absolute; top:50%; left:50%; z-index:20; transform:translate(-50%, -50%); width:100%; height:100%; background-color:rgba(51, 51, 51, 0.479); text-align:center; }
+.socialLogin{ display:none; position:absolute; top:0; left:0; width:100%; height:100%; background-color:rgba(51, 51, 51, 0.479); text-align:center; }
 .socialLogin ul{ display:none; position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); padding:2rem; border:1px solid #333; border-radius:0.25rem; background-color:#ededed; }
 .socialLogin li{ padding:0.5rem; margin:0.5rem 0; }
 .socialLogin li a{ display:block; width:100%; height:100%; font-size:1.25rem; white-space:nowrap; color:#fff; }
@@ -92,7 +92,9 @@ body{ height:100vh; background-color:#F5F5F5; }
 .comments .profile .userName{ float:left; margin-left:0.5rem; font-size:1.125rem; font-weight:400; }
 .comments .profile .createdAt{ float:left; margin-left:1rem; font-size:0.975rem; }
 
-.comments .profile > div{ position:relative; float:right; margin-left:1rem; }
+.comments .profile > div{ display:none; position:relative; float:right; margin-left:1rem; }
+.comments .profile > div.optionTrue{ display:block; }
+
 .comments .profile > div > a{ font-size:0.5rem; color:#999; }
 .comments .profile > div ul{ position:absolute; top:2.5rem; right:0; z-indeX:10; display:none; margin-left:0.5rem; border:1px solid #ccc; background-color:#ededed; }
 .comments .profile > div li{ line-height: 2.5rem; }
