@@ -25,9 +25,9 @@ body{ height:100vh; background-color:#F5F5F5; }
 .mobile > .socialBlock li span{  padding:0 0.5rem; font-size:1.125rem; }
 .mobile > .socialBlock button{ width:2.25rem; height:2.25rem; background-repeat:no-repeat; background-size:2.25rem 2.25rem; background-position: center;  }
 .likes{ background-image:url(img/like_empty.png); }
-.likes.active{ background-image:url(img/like_fill.png); }
+.likes.active, .activelikes{ background-image:url(img/like_fill.png); }
 .dislikes{ background-image:url(img/dislike_empty.png); }
-.dislikes.active{ background-image:url(img/dislike_fill.png); }
+.dislikes.active, .activedislikes{ background-image:url(img/dislike_fill.png); }
 
 /* createComment */
 .createComment{ width:100%; padding:1rem; border-bottom:1px solid #333; background-color:#ededed; }
@@ -106,7 +106,14 @@ body{ height:100vh; background-color:#F5F5F5; }
 .comments .socialBlock li{ display:flex; align-items:center; margin-right:1rem; }
 .comments .socialBlock li span{ padding:0 0.5rem; }
 .comments .socialBlock a{ padding-right:1rem; background-size:0.75rem; background-image:url(img/reply_icon.png); background-position:right center; background-repeat:no-repeat; background-size:0.675rem; color:#666; font-weight:400; }
-.comments .socialBlock button.likes, .socialBlock button.dislikes { width:2.25rem; height:2.25rem; background-repeat:no-repeat; background-size:2.25rem 2.25rem; background-position: center;  }
+.comments .socialBlock button.likes, .activelikes, .socialBlock button.dislikes, .activedislikes { width:2.25rem; height:2.25rem; background-repeat:no-repeat; background-size:2.25rem 2.25rem; background-position: center;  }
+
+/* updateForm */
+.aComment.hide{ display:none; }
+.updateForm{ display:none; justify-content:space-between; width:100%; }
+.updateForm input{ width:75%; height:2.5rem; margin:0.25rem 0; padding:0 0.5rem; border:1px solid #999; }
+.updateForm button{ width:20%; height:2.5rem; background-color:#F5F5F5; border:1px solid #333; border-radius:0.25rem; }
+.updateForm.active{ display:flex; } 
 
 /* footer */
 footer{ width:100%; padding:1rem; text-align:center; background-color:#ededed; font-size:1.5rem; font-weight:400; }
