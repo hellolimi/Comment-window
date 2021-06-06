@@ -6,6 +6,7 @@ document.cookie = "crossCookie=bar; SameSite=None; Secure";
 const commentsUl = document.querySelector(".comments");
 let commentsData = [
     {
+        email: "ltbllim@gmail.com",
         userName: "Limi",
         userPhoto: "img/limPhoto.png",
         date: dateForm(),
@@ -13,6 +14,7 @@ let commentsData = [
         comment: "Is this your cat?! SO CUTE 🥰"
     },
     {
+        email: "adam@gmail.com",
         userName: "Adam",
         userPhoto: "img/adamPhoto.png",
         date: dateForm(),
@@ -28,7 +30,8 @@ function dateForm(){
 }
 
 class LiModel {
-    constructor(name, photo, date, createdAt, comment){
+    constructor(email, name, photo, date, createdAt, comment){
+        this.email = email,
         this.userName = name,
         this.userPhoto = photo,
         this.date = date,
@@ -37,6 +40,7 @@ class LiModel {
     }
     makeLi(){
         const li = document.createElement("li");
+        const userToken = getUserToken();
         li.classList.add("comment");
         let TIME = Date.now();
         let passedTime = (TIME - this.createdAt)/1000;
@@ -60,7 +64,7 @@ class LiModel {
                 <img class="userPic" src="${this.userPhoto}" alt="사용자 프로필 이미지" />
                 <span class="userName">${this.userName}</span>
                 <span class="createdAt">${timeView}</span>
-                <div class="option">
+                <div class=${userToken === this.email?"optionTrue option":"option"}>
                     <a href="#option" class="optionToggle" onclick="toggleOption()">● ● ●</a>
                     <ul>
                         <li>
@@ -93,8 +97,8 @@ class LiModel {
 }
 
 commentsData.map(el => {
-    const {userName, userPhoto, date, createdAt, comment} = el;
-    const aComment = new LiModel(userName, userPhoto, date, createdAt, comment);
+    const {email, userName, userPhoto, date, createdAt, comment} = el;
+    const aComment = new LiModel(email, userName, userPhoto, date, createdAt, comment);
     aComment.makeLi();
 });
 
@@ -121,7 +125,7 @@ function onCreate(e){
     if(lastComment>0 && commentsData[lastComment].createdAt >= Date.now() - 6000){
         return window.alert(`Sorry! Cannot leave a comment in a row! \nPlease try later :)`);
     }else{
-        const newComment = new LiModel("CIZION", "img/userPhoto.png", dateForm(), Date.now(), input.value);  
+        const newComment = new LiModel(getUserToken(), "CIZION", "img/userPhoto.png", dateForm(), Date.now(), input.value);  
         commentsData.push(newComment); 
         commentsData[commentsData.length-1].makeLi();
         input.value = "";
@@ -183,6 +187,7 @@ const loginBox = document.querySelector(".loginBox");
 const snsBox = document.querySelector(".snsBox");
 /* socialLogin activation */
 notLoggedIn.addEventListener("click", (e)=>{
+    mobileFrame.scrollTo(0, 0);
     const {target} = e;
     if(target.classList.contains("socialLogin")){
         socialLogin.classList.remove("active");
@@ -245,8 +250,8 @@ function onSingIn(){
     }
     mobileFrame.style.overflowY = "visible";
 }
+/* logtOut */
 const logOut = document.getElementById("logOut");
-
 logOut.addEventListener("click", ()=>{
    let confirm = window.confirm("Do you really want to leave?");
    if(confirm){
@@ -256,12 +261,14 @@ logOut.addEventListener("click", ()=>{
         verifyLogin();
    }
 });
+
 verifyLogin();
+
 function verifyLogin(){
-    const userToken = sessionStorage.getItem("token");
     const notLoggedIn = document.querySelector(".notLoggedIn");
     const loggedIn = document.querySelector(".loggedIn");
-    if(Boolean(userToken)){
+
+    if(Boolean(getUserToken())){
         logOut.style.display = "block";
         notLoggedIn.style.display = "none";
         loggedIn.style.display = "block";
@@ -270,4 +277,8 @@ function verifyLogin(){
         notLoggedIn.style.display = "block";
         loggedIn.style.display = "none";
     }
+}
+
+function getUserToken(){
+    return sessionStorage.getItem("token");
 }
