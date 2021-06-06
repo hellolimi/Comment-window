@@ -177,7 +177,7 @@ function onCreate(e){
     }else{
         const getUsers = commentsData.map(el => el.userName);
         const lastComment = getUsers.lastIndexOf("CIZION");
-        if(lastComment>0 && commentsData[lastComment].createdAt >= Date.now() - 6000){
+        if(lastComment>0 && commentsData[lastComment].createdAt >= Date.now() - 10000){
             return window.alert(`Sorry! Cannot leave a comment in a row! \nPlease try later :)`);
         }else{
             const newComment = new LiModel("", getUserToken(), "CIZION", "img/userPhoto.png", dateForm(), Date.now(), input.value);  
@@ -194,8 +194,9 @@ const commentNum = document.querySelector(".commentNum");
 const comments = document.getElementsByClassName("comment");
 commentNum.innerText = comments.length;
 
+/* post */
 function setClickEvent(){
-    const {target} =window.event;
+    const {target} = window.event;
 
     function onClickToggle(){
         const parent = target.parentNode;
@@ -335,7 +336,6 @@ logOut.addEventListener("click", ()=>{
    if(confirm){
         sessionStorage.removeItem("token");
         window.location.reload();
-        console.log(sessionStorage.getItem("token"));
         verifyLogin();
    }
 });
