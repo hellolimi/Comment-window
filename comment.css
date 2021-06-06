@@ -7,8 +7,8 @@ img{ display: block; width:180px; }
 button{ cursor: pointer; background-color:transparent; border:none; }
 a{ text-decoration:none; }
 body{ height:100vh; background-color:#F5F5F5; }
-
-.mobile{ overflow-x: hidden; overflow-y:visible;  box-sizing:content-box; }
+.away{ position: absolute; left:-999em; }
+.mobile{ position:relative; overflow-x: hidden; overflow-y:visible;  box-sizing:content-box; }
 
 /* top */
 .top{ display:flex; justify-content:space-between; align-items:center; width:100%; padding:0.5rem 1rem; border-bottom:1px solid #333; }
@@ -31,14 +31,58 @@ body{ height:100vh; background-color:#F5F5F5; }
 
 /* createComment */
 .createComment{ width:100%; padding:1rem; border-bottom:1px solid #333; background-color:#ededed; }
-.loggedIn{ display:block; }
+/* logIn */
+.loggedIn{ display:none; }
 .loggedIn .profile{ height:2.5rem; line-height:2.5rem; margin-bottom:0.5rem; }
 .loggedIn .profile img{ float:left; width:2.5rem; height:2.5rem; object-fit:cover; object-position:center; border-radius:50%; }
 .loggedIn .profile .userName{ margin-left:0.5rem; font-size:1.125rem; font-weight:400; }
 .loggedIn #commentForm { display:flex; flex-wrap:wrap; justify-content: space-between; width:100%; }
 .loggedIn #commentForm input{ width:75%; height:2.5rem; padding:0 0.5rem; border:1px solid #999; }
 .loggedIn #commentForm button{ width:20%; height:2.5rem; background-color:#F5F5F5; border:1px solid #333; border-radius:0.25rem; }
-.notLoggedIn button{ display: none; font-weight:400; text-decoration:underline; }
+
+.notLoggedIn button{ display:block; font-weight:400; text-decoration:underline; }
+#logOut { font-weight:500; }
+.socialLogin{ display:none; position:absolute; top:50%; left:50%; z-index:20; transform:translate(-50%, -50%); width:100%; height:100%; background-color:rgba(51, 51, 51, 0.479); text-align:center; }
+.socialLogin ul{ display:none; position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); padding:2rem; border:1px solid #333; border-radius:0.25rem; background-color:#ededed; }
+.socialLogin li{ padding:0.5rem; margin:0.5rem 0; }
+.socialLogin li a{ display:block; width:100%; height:100%; font-size:1.25rem; white-space:nowrap; color:#fff; }
+.socialLogin li span{ font-weight:500; font-size:1.25rem; color:#fff; }
+/* naver */
+.socialLogin li:nth-child(1){ background-color:#00C039; }
+/* kakao */
+.socialLogin li:nth-child(2){ background-color:#ffe71281; }
+.socialLogin li:nth-child(2) span, .socialLogin li:nth-child(2) a{ color:#000000; }
+/* google */
+.socialLogin li:nth-child(3) {background-color:#fff; }
+.socialLogin li:nth-child(3) a { color:#000000; }
+.socialLogin li:nth-child(3) span { border-bottom:4px solid #FABB05; }
+.socialLogin li:nth-child(3) span:nth-child(1){ color:#E94235; }
+.socialLogin li:nth-child(3) span:nth-child(2){ color:#4285F4; }
+.socialLogin li:nth-child(3) span:nth-child(3){ color:#34A853; }
+/* facebook */
+.socialLogin li:nth-child(4) { background-color:#4867AA; }
+.socialLogin li:nth-child(4) a{ color:#fff; }
+.socialLogin li:nth-child(4) span{ color:#fff; }
+/* twitter */
+.socialLogin li:nth-child(5){ background-color:#1DA1F2; }
+/* active */
+.socialLogin.active{ display:block; }
+.socialLogin.active ul{ display:block; }
+.socialLogin.active ul.done{ display:none; }
+
+/* snsBtn */
+.socialLogin .loginBox{  display:none; flex-direction:column; justify-content:center; align-items:center; width:100%; height:100vh; max-height:720px; padding:0 1rem; background-color:#ededed; }
+.socialLogin .loginBox a{ position:absolute; top:1rem; right:1rem; }
+.socialLogin .loginBox h3{ font-size:1.45rem; font-weight:500; }
+.socialLogin p{ margin:0.5rem; }
+.selectUser{ display:flex; justify-content:center; align-items:center; width:100%; margin:0.5rem; padding:0.5rem 0; border-top:1px solid #333; border-bottom:1px solid #333; background-color:#fff; }
+.selectUser img{ width:3.5rem; margin-right:1rem; }
+/* socialLoginForm */
+.socialLogin form{ display:flex; width:100%; flex-direction:column; align-items:center; }
+.socialLogin form input{ width:75%; height:2.5rem; margin:0.25rem 0; padding:0 0.5rem; border:1px solid #999; }
+.socialLogin form button{ width:75%; height:2.5rem; margin:0.25rem 0; padding:0 0.5rem; border:1px solid #fff; background-color:#666; color:#fff; border-radius:0.25rem; }
+/* active */
+.socialLogin .loginBox.active{ display:flex; }
 
 /* comments */
 .comments{ width:100%; }
@@ -67,5 +111,5 @@ footer{ width:100%; padding:1rem; text-align:center; background-color:#ededed; f
 
 @media screen and (min-width:1024px) {
     body{ display:flex; align-items:center; }
-    .mobile{ width:540px; height:720px; margin:auto; border:1rem solid #333; border-radius:1rem; }
+    .mobile{position:relative; width:540px; height:720px; margin:auto; border:1rem solid #333; border-radius:1rem; }
 }
