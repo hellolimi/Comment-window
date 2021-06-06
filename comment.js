@@ -6,19 +6,18 @@ document.cookie = "crossCookie=bar; SameSite=None; Secure";
 const commentsUl = document.querySelector(".comments");
 let commentsData = [];
 
-class LiModel {
-    constructor(id, email, name, photo, date, createdAt, comment){
-        this.id = id!==""?id:commentsData.length + 1,
-        this.email = email,
-        this.userName = name,
-        this.userPhoto = photo,
-        this.date = date,
-        this.createdAt = createdAt,
-        this.comment = comment,
-        this.like = 0,
-        this.dislike = 0
-    }
-    makeLi(){
+function LiModel (id, email, name, photo, date, createdAt, comment){
+    this.id = id!==""?id:commentsData.length + 1,
+    this.email = email,
+    this.userName = name,
+    this.userPhoto = photo,
+    this.date = date,
+    this.createdAt = createdAt,
+    this.comment = comment,
+    this.like = 0,
+    this.dislike = 0
+
+    this.makeLi = () => {
         const li = document.createElement("li");
         const userToken = getUserToken();
         li.classList.add("comment");
@@ -150,6 +149,7 @@ function updateFormSubmit(){
 /* onsubmit comment */
 const createForm = document.forms.commentForm;
 createForm.addEventListener("submit", (e)=>{
+    e.preventDefault();
     onCreate(e);
 });
 
@@ -168,7 +168,6 @@ function noBadWords(val){
 }
 
 function onCreate(e){
-    e.preventDefault();
     const input = e.target.comment;
     if(noBadWords(input)){
         return false;
@@ -307,7 +306,8 @@ closeBtn.addEventListener("click", (e)=>{
 });
 
 const thisForm = document.forms.socialLoginForm;
-thisForm.addEventListener("submit", ()=>{
+thisForm.addEventListener("submit", (e)=>{
+    e.preventDefault();
     onSingIn();
 })
 
