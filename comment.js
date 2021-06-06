@@ -62,9 +62,6 @@ class LiModel {
                 <button type="submit">Update</button>
             </form>
             <ul class="socialBlock">
-                <li>
-                    <a href="#reply" class="likes">Reply</a>
-                </li>
                 <li class="toggleBtn">
                     <button type="button" class=${this.like>0?"activelikes":"likes"} data-id="${this.id}" onclick="commentLikeToggle('like')"></button>
                     <span class="count">${this.like}</span>
@@ -81,7 +78,7 @@ class LiModel {
 }
 commentsData = [
     new LiModel(1, "ltbllim@gmail.com", "Limi", "img/limPhoto.png", dateForm(), 1622908185945, "Is this your cat?! SO CUTE 🥰"),
-    new LiModel(2, "adam@gmail.com", "Adam", "img/adamPhoto.png", dateForm(), 1622916314040, "I wanna pat herrrr...")
+    new LiModel(2, "adam@gmail.com", "Adam", "img/adamPhoto.png", dateForm(), 1622976200441, "I wanna pat herrrr...")
 ];
 
 function dateForm(){
@@ -92,19 +89,19 @@ function dateForm(){
 
 createComment(commentsData);
 
-/* create comments from data */
 function createComment(data){
     commentsUl.innerHTML = null;
     data.map(el => {
         el.makeLi();
     });
 }
-/* toggleOption */
+
+/* toggleOption / Update & Delete */
 function toggleOption(){
     const {target} = window.event;
     target.parentNode.classList.toggle("active");
 }
-/* Update / Delete a comment */
+
 function onDelete(){
     const target = window.event.target;
     const targetId = target.dataset.id;
@@ -115,6 +112,7 @@ function onDelete(){
         commentNum.innerText = comments.length;
     }
 }
+
 function onUpdate(){
     window.event.preventDefault();
     const target = window.event.target;
@@ -149,7 +147,7 @@ function updateFormSubmit(){
     }
 }
 
-/* create comments */
+/* onsubmit comment */
 const createForm = document.forms.commentForm;
 createForm.addEventListener("submit", (e)=>{
     onCreate(e);
@@ -194,7 +192,7 @@ const commentNum = document.querySelector(".commentNum");
 const comments = document.getElementsByClassName("comment");
 commentNum.innerText = comments.length;
 
-/* post */
+/* post - socialBlock (likes/dislikes) */
 function setClickEvent(){
     const {target} = window.event;
 
@@ -227,13 +225,13 @@ function setClickEvent(){
         }
     }
 }
-/* comment */
+/* comment - socialBlock (likes/dislikes) */
 function commentLikeToggle(btn){
     const {target} = window.event;
     const targetId = target.dataset.id;
     const thisUl = target.parentNode.parentNode;
     if(!target.className.includes("active")){
-        if(thisUl.children[1].children[0].className.includes("active") || thisUl.children[2].children[0].className.includes("active")){
+        if(thisUl.children[0].children[0].className.includes("active") || thisUl.children[1].children[0].className.includes("active")){
             alert("Sorry! You can only like OR dislike this!");
         }else{
             if(btn === "like"){
@@ -255,7 +253,6 @@ function commentLikeToggle(btn){
         }
     }
 }
-
 
 /* log in */
 const notLoggedIn = document.querySelector(".notLoggedIn");
